@@ -11,10 +11,12 @@ extern "C" {
 #endif
 
 /************************************* INCLUDES ***************************************************/
+#include <stdint.h>
 
 /************************************* MACROS AND DEFINES *****************************************/
 #ifndef DIGITAL_H
 #define DIGITAL_H
+#endif
 
 /************************************* TYPEDEFS ***************************************************/
 //! Referencia a un descriptor para gestionar una salida digital 
