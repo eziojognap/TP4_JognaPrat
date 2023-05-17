@@ -1,3 +1,4 @@
+CFLAGS = -g0
 MODULES = 
 BOARD ?= edu-ciaa-nxp
 MUJU ?= ./muju

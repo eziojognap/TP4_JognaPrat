@@ -1,8 +1,8 @@
 /***************************************************************************************************
  * @file    DIGITAL.H
  * @author  eziojognap
- * @date   
- * @brief   
+ * @date
+ * @brief
  **************************************************************************************************/
 
 /************************************* C++ compilar como C ****************************************/
@@ -19,8 +19,9 @@ extern "C" {
 #endif
 
 /************************************* TYPEDEFS ***************************************************/
-//! Referencia a un descriptor para gestionar una salida digital 
+//! Referencia a un descriptor para gestionar una salida digital
 typedef struct digital_output_estructura * digital_output_puntero;
+
 /************************************* EXPORTED VARIABLES *****************************************/
 
 /************************************* GLOBAL FUNCTION PROTOTYPES *********************************/
@@ -28,17 +29,16 @@ typedef struct digital_output_estructura * digital_output_puntero;
 digital_output_puntero DigitalOutputCreate(uint8_t port, uint8_t pin);
 
 /// @brief  activa una salida
-/// @param output 
+/// @param output
 void DigitalOutputActivate(digital_output_puntero output);
 
 /// @brief desactiva una salida
-/// @param output 
+/// @param output
 void DigitalOutputDeactivate(digital_output_puntero output);
 
 /// @brief cambia la salida
-/// @param output 
+/// @param output
 void DigitalOutputToggle(digital_output_puntero output);
-
 
 #ifdef __cplusplus /*Con esto se cierra la la def condicional para compilar en c codigo que es de  \
                       c++*/
