@@ -135,6 +135,11 @@ int main(void) {
     digital_output_puntero led_amarillo;
     digital_output_puntero led_azul;
 
+    digital_input_puntero Boton1;
+    digital_input_puntero Boton2;
+    digital_input_puntero Boton3;
+    digital_input_puntero Boton4;
+
     int divisor = 0;
     bool current_state, last_state = false;
 
@@ -162,40 +167,40 @@ int main(void) {
 
     /********* Teclas 1 2 3 y 4 *********/
     Chip_SCU_PinMuxSet(TEC_1_PORT, TEC_1_PIN, SCU_MODE_INBUFF_EN | SCU_MODE_PULLUP | TEC_1_FUNC);
-    Chip_GPIO_SetPinDIR(LPC_GPIO_PORT, TEC_1_GPIO, TEC_1_BIT, false);
+    Boton1 = DigitalInputCreate(TEC_1_GPIO, TEC_1_BIT, true);
 
     Chip_SCU_PinMuxSet(TEC_2_PORT, TEC_2_PIN, SCU_MODE_INBUFF_EN | SCU_MODE_PULLUP | TEC_2_FUNC);
-    Chip_GPIO_SetPinDIR(LPC_GPIO_PORT, TEC_2_GPIO, TEC_2_BIT, false);
+    Boton2 = DigitalInputCreate(TEC_2_GPIO, TEC_2_BIT, true);
 
     Chip_SCU_PinMuxSet(TEC_3_PORT, TEC_3_PIN, SCU_MODE_INBUFF_EN | SCU_MODE_PULLUP | TEC_3_FUNC);
-    Chip_GPIO_SetPinDIR(LPC_GPIO_PORT, TEC_3_GPIO, TEC_3_BIT, false);
+    Boton3 = DigitalInputCreate(TEC_3_GPIO, TEC_3_BIT, true);
 
     Chip_SCU_PinMuxSet(TEC_4_PORT, TEC_4_PIN, SCU_MODE_INBUFF_EN | SCU_MODE_PULLUP | TEC_4_FUNC);
-    Chip_GPIO_SetPinDIR(LPC_GPIO_PORT, TEC_4_GPIO, TEC_4_BIT, false);
+    Boton4 = DigitalInputCreate(TEC_4_GPIO, TEC_4_BIT, true);
 
     /********** Lógica ************/
     while (true) {
-        if (Chip_GPIO_ReadPortBit(LPC_GPIO_PORT, TEC_1_GPIO, TEC_1_BIT) == 0) {
+        if (true == DigitalInputGetState(Boton1)) {
             DigitalOutputActivate(led_azul);
         } else {
             DigitalOutputDeactivate(led_azul);
         }
 
-        current_state = (Chip_GPIO_ReadPortBit(LPC_GPIO_PORT, TEC_2_GPIO, TEC_2_BIT) == 0);
+        current_state = (true == DigitalInputGetState(Boton2));
         if ((current_state) && (!last_state)) {
             DigitalOutputToggle(led_rojo);
         }
         last_state = current_state;
 
-        if (Chip_GPIO_ReadPortBit(LPC_GPIO_PORT, TEC_3_GPIO, TEC_3_BIT) == 0) {
+        if (true == DigitalInputGetState(Boton3)) {
             DigitalOutputActivate(led_amarillo);
         }
-        if (Chip_GPIO_ReadPortBit(LPC_GPIO_PORT, TEC_4_GPIO, TEC_4_BIT) == 0) {
+        if (true == DigitalInputGetState(Boton4)) {
             DigitalOutputDeactivate(led_amarillo);
         }
 
         divisor++;
-        if (divisor == 5) {
+        if (divisor == 2) {
             divisor = 0;
             DigitalOutputToggle(led_verde);
         }
